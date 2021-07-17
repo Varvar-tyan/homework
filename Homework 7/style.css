@@ -1,0 +1,297 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    font-size:14px;
+    line-height: 1;
+}
+
+#wrapper {
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    background: #d3b714;
+    padding: 0 15px;
+}
+
+.menu-toggle {
+    position: absolute;
+    left: -999999px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.menu-btn {
+    position: relative;
+    height: 20px;
+    width: 30px;
+    display: none;
+}
+
+.menu-btn::before,
+.menu-btn::after,
+.menu-btn span {
+    height: 3px;
+    border-radius: 2px;
+    background: #000;
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+.menu-btn::before {
+    content: '';
+    top: 0;
+}
+
+.menu-btn::after {
+    content: '';
+    bottom: 0;
+}
+
+.menu-btn span {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding: 30px 0;
+}
+
+.nav-list {
+    list-style: none;
+    align-items: center;
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+}
+
+.nav-item + .nav-item {
+    padding-left: 15px;
+}
+
+.nav-link {
+    color: #000;
+    text-decoration: none;
+
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+}
+
+.main {
+    flex-grow: 1;
+    display: flex;
+}
+
+.aside {
+    max-width: 210px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.aside-left {
+    background: #b18cc0;
+    order: -1;
+}
+
+.aside-right {
+    background: #9cb1c7;
+}
+
+.content {
+    background: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.box {
+    padding: 0 15px;
+}
+
+.box h1 {
+    color: #000;
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* компенсируем отступ, который есть внутри у кол, чтобы влезало и не выходило за пределы контейнера */
+    margin: 0 -15px;
+}
+
+.col {
+    padding: 0 10px 20px;
+    flex-basis: 30%;
+    display: flex;
+}
+
+.card {
+    width: 100%;
+    border: 1px solid #000;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    transition: all 0.5s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 3px 5px 10px 0 rgba(0, 0, 0, 0.3)
+}
+
+.card-img {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px rgb(199,183,183);
+    margin: 20px auto;
+}
+
+.card-body {
+    padding: 15px;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.card-body h3 {
+    margin: 0 0 10px 0;
+}
+
+.card-link {
+    align-self: center;
+    color: #fff;
+    background: #685174;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.card-link:hover {
+    background: #d3b714;
+}
+
+.footer {
+    background: #86ec86;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+@media (max-width: 1023px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .aside {
+        max-width: 100%;
+    }
+
+    .aside-left {
+        order: 0;
+    }
+
+    .col {
+        flex-basis: 35%;
+    }
+}
+
+@media (max-width: 767px) {
+    .nav-list {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #d3b714;
+        padding: 18px;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .menu-btn::before,
+    .menu-btn::after,
+    .menu-btn span {
+        display: block;
+    }
+
+    .header {
+        position: relative;
+    }
+
+    .nav-item + .nav-item {
+        padding-left: 0;
+    }
+
+    .nav-item {
+        margin-bottom: 15px;
+    }
+
+    .menu-toggle:checked ~ .nav-list {
+        height: auto;
+        opacity: 1;
+        visibility: visible;
+        transition: all .3s ease-in;
+    }
+
+    .menu-toggle:checked + .menu-btn span {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .menu-toggle:checked + .menu-btn::before {
+        transform: translateY(10px) rotate(45deg);
+        transition: transform 0.3s ease-in;
+    }
+
+    .menu-toggle:checked + .menu-btn::after {
+        top: 0;
+        transform: translateY(10px) rotate(-45deg);
+        transition: transform 0.3s ease-in;
+    }
+    
+    .card-img {
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 575px) {
+    .col {
+        flex-basis: 75%;
+    }
+}
